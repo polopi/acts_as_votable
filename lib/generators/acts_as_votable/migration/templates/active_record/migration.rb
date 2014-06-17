@@ -1,6 +1,6 @@
 class ActsAsVotableMigration < ActiveRecord::Migration
   def self.up
-    create_table :votes do |t|
+    create_table :gem_votes do |t|
 
       t.references :votable, :polymorphic => true
       t.references :voter, :polymorphic => true
@@ -13,15 +13,15 @@ class ActsAsVotableMigration < ActiveRecord::Migration
     end
 
     if ActiveRecord::VERSION::MAJOR < 4
-      add_index :votes, [:votable_id, :votable_type]
-      add_index :votes, [:voter_id, :voter_type]
+      add_index :gem_votes, [:votable_id, :votable_type]
+      add_index :gem_votes, [:voter_id, :voter_type]
     end
 
-    add_index :votes, [:voter_id, :voter_type, :vote_scope]
-    add_index :votes, [:votable_id, :votable_type, :vote_scope]
+    add_index :gem_votes, [:voter_id, :voter_type, :vote_scope]
+    add_index :gem_votes, [:votable_id, :votable_type, :vote_scope]
   end
 
   def self.down
-    drop_table :votes
+    drop_table :gem_votes
   end
 end
