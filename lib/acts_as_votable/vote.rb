@@ -6,8 +6,8 @@ module ActsAsVotable
     self.table_name = "gem_votes"
 
     include Helpers::Words
-
-    if ::ActiveRecord::VERSION::MAJOR < 4
+    
+    if defined?(ProtectedAttributes) || !defined?(ActionController::StrongParameters)
       attr_accessible :votable_id, :votable_type,
         :voter_id, :voter_type,
         :votable, :voter,
